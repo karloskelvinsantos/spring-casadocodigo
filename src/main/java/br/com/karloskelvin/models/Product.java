@@ -1,6 +1,8 @@
 package br.com.karloskelvin.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -8,10 +10,16 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String title;
+
     @Lob
     private String description;
+
     private int pages;
+
+    @ElementCollection
+    private List<Price> prices = new ArrayList<Price>();
 
     public Integer getId() {
         return id;
@@ -43,5 +51,13 @@ public class Product {
 
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+    public List<Price> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<Price> prices) {
+        this.prices = prices;
     }
 }
